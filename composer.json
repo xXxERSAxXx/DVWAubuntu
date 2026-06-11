@@ -1,0 +1,15 @@
+{
+    "name": "elkin/dvwa",
+    "autoload": {
+        "psr-4": {
+            "Elkin\\Dvwa\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ElkinMG",
+            "email": "elkinmoscoso1204346@correo.itm.edu.co"
+        }
+    ],
+    "require": {}
+}
