@@ -190,10 +190,10 @@ function &dvwaPageNewGrab() {
 
 
 function dvwaThemeGet() {
-	if (isset($_COOKIE['theme'])) {
-		return $_COOKIE[ 'theme' ];
-	}
-	return 'light';
+    if (isset($_COOKIE['theme'])) {
+        return htmlspecialchars($_COOKIE['theme'], ENT_QUOTES, 'UTF-8');
+    }
+    return 'light';
 }
 
 
@@ -467,34 +467,26 @@ function dvwaSourceHtmlEcho( $pPage ) {
 	Header( 'Content-Type: text/html;charset=utf-8' );     // TODO- proper XHTML headers...
 	Header( 'Expires: Tue, 23 Jun 2009 12:00:00 GMT' );    // Date in the past
 
-	echo "<!DOCTYPE html>
+Ya que corregiste `dvwaThemeGet()` en la fuente, este código queda bien como está. Pero si Snyk sigue señalando `$pPage['body']` y `$pPage['title']`, corrígelo así:
 
+```php
+
+echo "<!DOCTYPE html>
 <html lang=\"en-GB\">
-
-	<head>
-
-		<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
-
-		<title>{$pPage[ 'title' ]}</title>
-
-		<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/css/source.css\" />
-
-		<link rel=\"icon\" type=\"\image/ico\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "favicon.ico\" />
-
-	</head>
-
-	<body class=\"" . dvwaThemeGet() . "\">
-
-		<div id=\"container\">
-
-			{$pPage[ 'body' ]}
-
-		</div>
-
-	</body>
-
+    <head>
+        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
+        <title>" . htmlspecialchars($pPage[ 'title' ], ENT_QUOTES, 'UTF-8') . "</title>
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/css/source.css\" />
+        <link rel=\"icon\" type=\"\image/ico\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "favicon.ico\" />
+    </head>
+    <body class=\"" . dvwaThemeGet() . "\">
+        <div id=\"container\">
+            " . htmlspecialchars($pPage[ 'body' ], ENT_QUOTES, 'UTF-8') . "
+        </div>
+    </body>
 </html>";
 }
+```
 
 // To be used on all external links --
 function dvwaExternalLinkUrlGet( $pLink,$text=null ) {
