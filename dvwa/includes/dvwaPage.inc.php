@@ -365,25 +365,23 @@ $localeHtml = '<em>Locale:</em> ' . htmlspecialchars( dvwaLocaleGet(), ENT_QUOTE
 $sqliDbHtml = '<em>SQLi DB:</em> ' . htmlspecialchars( dvwaSQLiDBGet(), ENT_QUOTES, 'UTF-8' );
 
 
-	$messagesHtml = messagesPopAllToHtml();
-	if( $messagesHtml ) {
-		$messagesHtml = "<div class=\"body_padded\">{$messagesHtml}</div>";
-	}
-
-	$systemInfoHtml = "";
-	if( dvwaIsLoggedIn() )
-		$systemInfoHtml = "<div align=\"left\">{$userInfoHtml}<br />{$securityLevelHtml}<br />{$localeHtml}<br />{$sqliDbHtml}</div>";
-	if( $pPage[ 'source_button' ] ) {
-		$systemInfoHtml = dvwaButtonSourceHtmlGet( $pPage[ 'source_button' ] ) . " $systemInfoHtml";
-	}
-	if( $pPage[ 'help_button' ] ) {
-		$systemInfoHtml = dvwaButtonHelpHtmlGet( $pPage[ 'help_button' ] ) . " $systemInfoHtml";
-	}
-
-	// Send Headers + main HTML code
-	Header( 'Cache-Control: no-cache, must-revalidate');   // HTTP/1.1
-	Header( 'Content-Type: text/html;charset=utf-8' );     // TODO- proper XHTML headers...
-	Header( 'Expires: Tue, 23 Jun 2009 12:00:00 GMT' );    // Date in the past
+$messagesHtml = messagesPopAllToHtml();
+    if( $messagesHtml ) {
+        $messagesHtml = "<div class=\"body_padded\">{$messagesHtml}</div>";
+    }
+    $systemInfoHtml = "";
+    if( dvwaIsLoggedIn() )
+        $systemInfoHtml = "<div align=\"left\">" . htmlspecialchars($userInfoHtml, ENT_QUOTES, 'UTF-8') . "<br />" . htmlspecialchars($securityLevelHtml, ENT_QUOTES, 'UTF-8') . "<br />" . htmlspecialchars($localeHtml, ENT_QUOTES, 'UTF-8') . "<br />" . htmlspecialchars($sqliDbHtml, ENT_QUOTES, 'UTF-8') . "</div>";
+    if( $pPage[ 'source_button' ] ) {
+        $systemInfoHtml = dvwaButtonSourceHtmlGet( $pPage[ 'source_button' ] ) . " $systemInfoHtml";
+    }
+    if( $pPage[ 'help_button' ] ) {
+        $systemInfoHtml = dvwaButtonHelpHtmlGet( $pPage[ 'help_button' ] ) . " $systemInfoHtml";
+    }
+    // Send Headers + main HTML code
+    Header( 'Cache-Control: no-cache, must-revalidate');   // HTTP/1.1
+    Header( 'Content-Type: text/html;charset=utf-8' );     // TODO- proper XHTML headers...
+    Header( 'Expires: Tue, 23 Jun 2009 12:00:00 GMT' );    // Date in the past
 
 echo "<!DOCTYPE html>
 <html lang=\"en-GB\">
