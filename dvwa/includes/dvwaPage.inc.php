@@ -341,29 +341,28 @@ function dvwaHtmlEcho( $pPage ) {
 		$menuHtml .= "<ul class=\"menuBlocks\">{$menuBlockHtml}</ul>";
 	}
 
-	// Get security cookie --
+// Get security cookie --
 	$securityLevelHtml = '';
 	switch( dvwaSecurityLevelGet() ) {
 		case 'low':
-			$securityLevelHtml = 'low';
+			$securityLevelHtml = htmlspecialchars('low', ENT_QUOTES, 'UTF-8');
 			break;
 		case 'medium':
-			$securityLevelHtml = 'medium';
+			$securityLevelHtml = htmlspecialchars('medium', ENT_QUOTES, 'UTF-8');
 			break;
 		case 'high':
-			$securityLevelHtml = 'high';
+			$securityLevelHtml = htmlspecialchars('high', ENT_QUOTES, 'UTF-8');
 			break;
 		default:
-			$securityLevelHtml = 'impossible';
+			$securityLevelHtml = htmlspecialchars('impossible', ENT_QUOTES, 'UTF-8');
 			break;
 	}
 	// -- END (security cookie)
 
-	$userInfoHtml = '<em>Username:</em> ' . ( dvwaCurrentUser() );
-	$securityLevelHtml = "<em>Security Level:</em> {$securityLevelHtml}";
-	$securityLevelHtml = "<em>Security Level:</em> {$securityLevelHtml}";
-	$localeHtml = '<em>Locale:</em> ' . ( dvwaLocaleGet() );
-	$sqliDbHtml = '<em>SQLi DB:</em> ' . ( dvwaSQLiDBGet() );
+$userInfoHtml = '<em>Username:</em> ' . htmlspecialchars( dvwaCurrentUser(), ENT_QUOTES, 'UTF-8' );
+$securityLevelHtml = "<em>Security Level:</em> {$securityLevelHtml}";
+$localeHtml = '<em>Locale:</em> ' . htmlspecialchars( dvwaLocaleGet(), ENT_QUOTES, 'UTF-8' );
+$sqliDbHtml = '<em>SQLi DB:</em> ' . htmlspecialchars( dvwaSQLiDBGet(), ENT_QUOTES, 'UTF-8' );
 
 
 	$messagesHtml = messagesPopAllToHtml();
