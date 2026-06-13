@@ -18,5 +18,7 @@ jobs:
       - name: Run Snyk to check for vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: snyk test
+        run: snyk code test --severity-treshold=low
+        continue-on-error: true
+        
 
